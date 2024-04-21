@@ -53,7 +53,7 @@ public class ProductController {
     public ResponseEntity<byte[]> getImageByProductId(@PathVariable Integer productId) {
         Product product = productService.getProductById(productId);
         if (product != null && product.getImageData() != null) {
-            byte[] imageData = ImageUtils.compressImage(product.getImageData());
+            byte[] imageData = ImageUtils.decompressImage(product.getImageData());
             return ResponseEntity.ok()
                     .contentType(MediaType.valueOf(product.getImageType()))
                     .body(imageData);
